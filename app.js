@@ -5,6 +5,9 @@ const app = express();
 const dotEnv = require('dotenv');
 dotEnv.config();
 const PORT = process.env.SERVER_PORT || 3000;
+const mongodb = require('./config/db/Mongoose');
+// const mongodb = require('./config/database/mongoose-connect');
+mongodb();
 
 const userRouter = require('./routes/users');
 
