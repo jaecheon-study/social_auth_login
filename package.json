@@ -18,13 +18,18 @@
   },
   "homepage": "https://github.com/jaecheon-study/social_auth_login#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "express-promise-router": "^3.0.3",
     "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.1",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.3"
