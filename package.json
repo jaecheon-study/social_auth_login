@@ -1,0 +1,30 @@
+{
+  "name": "social_auth_login",
+  "version": "1.0.0",
+  "description": "social_auth_login",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaecheon-study/social_auth_login.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaecheon-study/social_auth_login/issues"
+  },
+  "homepage": "https://github.com/jaecheon-study/social_auth_login#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.1",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
+}
