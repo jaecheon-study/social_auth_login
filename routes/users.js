@@ -11,21 +11,35 @@ const passportSignIn = passport.authenticate('local', {session: false});
 
 /**
  * @route   POST /users/signup
- * @desc    Test signup url
+ * @desc    SignIp url
  * @access  Public
  */
 router.route('/signup').post(validateBody(schemas.authSchema), userController.signUp);
 
 /**
  * @route   POST /users/login
- * @desc    Test login url
+ * @desc    Login url
  * @access  Public
  */
 router.route('/login').post(passportSignIn, userController.signIn);
 
 /**
+ * @route   POST /users/google
+ * @desc    Google Login Url
+ * @access  Public
+ */
+router.route('/google').post(userController.google);
+
+/**
+ * @route   POST /users/facebook
+ * @desc    Facebook Login Url
+ * @access  Public
+ */
+router.route('/facebook').post(userController.facebook);
+
+/**
  * @route   GET /users/secret
- * @desc    Test secret url
+ * @desc    Secret url
  * @access  Private
  */
 router.route('/secret').get(checkAuth, userController.secret);

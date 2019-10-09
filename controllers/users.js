@@ -53,6 +53,18 @@ module.exports = {
             tokenInfo: 'Bearer ' + token
         });
     },
+    google: async (req, res) => {
+        const token = signToken(req.user);
+        res.status(200).json({
+            tokenInfo: 'Bearer ' + token
+        });
+    },
+    facebook: async (req, res) => {
+        const token = signToken(req.user);
+        res.status(200).json({
+            tokenInfo: 'Bearer ' + token
+        });
+    },
     // 토큰 인증 확인
     secret: async (req, res) => {
         console.log('UsersController.secret() called...');
