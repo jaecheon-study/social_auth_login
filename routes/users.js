@@ -35,6 +35,13 @@ router.route('/google').post(passport.authenticate('googleToken', {session: fals
  * @desc    Facebook Login Url
  * @access  Public
  */
+router.route('/facebook').post(passport.authenticate('facebookToken', {session: false}), userController.facebook);
+
+/**
+ * @route   POST /users/facebook
+ * @desc    Facebook Login Url
+ * @access  Public
+ */
 router.route('/facebook').post(userController.facebook);
 
 /**

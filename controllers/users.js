@@ -1,6 +1,6 @@
 const userModle = require('../models/User');
 const JWT = require('jsonwebtoken');
-
+const gravatar = require('gravatar');
 
 // 토큰 생성
 signToken = user => {
@@ -18,7 +18,7 @@ module.exports = {
         // contents of req.value.body: { email: 'a1@test.com', password: '123456' }
         console.log('contents of req.value.body:', req.value.body);
 
-        const { email, password } = req.value.body;
+        const { username, email, password } = req.value.body;
 
         const foundUser = await userModle.findOne({ 'local.email': email });
         // 이미 가입한 유저가 있다면 (email 이 있다면)
@@ -28,13 +28,22 @@ module.exports = {
             });
         }
 
+        const avatar = gravatar.url(email, {
+            s: '200',
+            r: 'pg',
+            d: 'mm'
+        });
+
         const newUser = new userModle({
             method: 'local',
             local: {
                 email,
-                password
+                password,
+                username,
+                avatar
             }
         });
+        
         const token = signToken(newUser);
         await newUser.save()
             .then(user => {

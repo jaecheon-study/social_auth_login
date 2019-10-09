@@ -18,6 +18,12 @@ const userSchema = new Schema({
         },
         password:{
             type: String
+        },
+        avatar: {
+            type: String
+        },
+        username: {
+            type: String
         }
     },
     google: {
@@ -27,6 +33,12 @@ const userSchema = new Schema({
         email: {
             type: String,
             lowercase: true
+        },
+        avatar: {
+            type: String
+        },
+        userName: {
+            type: String
         }
     },
     facebook: {
@@ -36,6 +48,12 @@ const userSchema = new Schema({
         email: {
             type: String,
             lowercase: true
+        },
+        avatar: {
+            type: String
+        },
+        userName: {
+            type: String
         }
     }
 });

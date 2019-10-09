@@ -7,6 +7,8 @@ const { ExtractJwt } = require('passport-jwt');
 const LocalStrategy = require('passport-local');
 // google Strategy
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
+// facebook Strategy
+const FaceBookTokenStrategy = require('passport-facebook-token');
 const userModel = require('../../models/User');
 
 // JSON WEB TOKENS STRATEGY
@@ -88,9 +90,9 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
     clientID : process.env.GOOGLE_CLIENT_ID,
     clientSecret : process.env.GOOGLE_CLIENT_SECRET
 }, async(accessToken, refreshToken, profile, done) => {
-    // console.log('profile', profile);
-    // console.log('accessToken', accessToken);
-    // console.log('refreshToken', refreshToken);
+    console.log('profile', profile);
+    console.log('accessToken', accessToken);
+    console.log('refreshToken', refreshToken);
     try{
         const existingUser = await userModel.findOne({"google.id": profile.id});
         if(existingUser){
@@ -101,7 +103,8 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
             google: {
                 id: profile.id,
                 email: profile.emails[0].value,
-                // photo: profile.photos[0].value
+                avatar: profile.photos[0].value,
+                userName: profile.displayName
             }
         });
         await newUser.save();
@@ -110,6 +113,37 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
     }catch(error){
         done(error, false, error.message)
     }
+}));
 
+// Facebook
+passport.use('facebookToken', new FaceBookTokenStrategy({
+    clientID: process.env.FACEBOOK_CLIENT_ID,
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+}, async (accessToken, refreshToken, profile, done) => {
+    console.log('profile', profile);
+    console.log('accessToken', accessToken);
+    console.log('refreshToken', refreshToken);
+    try {
+        const existingUser = await userModel.findOne({'facebook.id': profile.id});
+        if (existingUser) {
+            return done(null, existingUser);
+        }
+
+        const newUser = new userModel({
+            method: 'facebook',
+            facebook: {
+                id: profile.id,
+                email: profile.emails[0].value,
+                avatar: profile.photos[0].value,
+                userName: profile.displayName
+            }
+        });
+
+        await newUser.save();
+        done(null, newUser);
+
+    } catch (e) {
+        done(e, false, e.message);
+    }
 
 }));

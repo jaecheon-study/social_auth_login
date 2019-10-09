@@ -33,7 +33,9 @@ module.exports = {
     schemas: {
         authSchema: Joi.object().keys({
             email: Joi.string().email().required(),
-            password: Joi.string().required()
+            password: Joi.string().required(),
+            username: Joi.string().required(),
+            avatar: Joi.string()
         })
     }
 };
