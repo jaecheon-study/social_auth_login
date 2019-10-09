@@ -14,13 +14,10 @@ const userSchema = new Schema({
     local: {
         email: {
             type: String,
-            required: true,
-            unique: true,
             lowercase: true
         },
         password:{
-            type: String,
-            required: true
+            type: String
         }
     },
     google: {

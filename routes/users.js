@@ -28,7 +28,7 @@ router.route('/login').post(passportSignIn, userController.signIn);
  * @desc    Google Login Url
  * @access  Public
  */
-router.route('/google').post(userController.google);
+router.route('/google').post(passport.authenticate('googleToken', {session: false}), userController.google);
 
 /**
  * @route   POST /users/facebook
