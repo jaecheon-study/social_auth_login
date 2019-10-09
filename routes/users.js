@@ -6,6 +6,7 @@ const passport = require('passport');
 const passportConf = require('../config/passport/passport');
 
 const checkAuth = passport.authenticate('jwt', { session: false });
+const passportSignIn = passport.authenticate('local', {session: false});
 
 
 /**
@@ -20,7 +21,7 @@ router.route('/signup').post(validateBody(schemas.authSchema), userController.si
  * @desc    Test login url
  * @access  Public
  */
-router.route('/login').post(userController.signIn);
+router.route('/login').post(passportSignIn, userController.signIn);
 
 /**
  * @route   GET /users/secret

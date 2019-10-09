@@ -75,3 +75,4 @@ userSchema.methods.isValidPassword = async function(newPassword) {
 
 // create user model
 module.exports = mongoose.model('users', userSchema);
+

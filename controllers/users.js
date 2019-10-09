@@ -1,6 +1,6 @@
 const userModle = require('../models/User');
 const JWT = require('jsonwebtoken');
-const SECRET = process.env.SECRET;
+
 
 // 토큰 생성
 signToken = user => {
@@ -9,7 +9,7 @@ signToken = user => {
         sub: user._id, // 발급자 아이디
         iat: new Date().getTime(), // 현재 시간
         exp: new Date().setDate(new Date().getDate() + 1)// 만료 시간
-    }, SECRET);
+    }, process.env.SECRET);
 }
 
 module.exports = {
@@ -46,11 +46,15 @@ module.exports = {
             })
             .catch(err => console.log(err));
     },
-    signIn: async (req, res, next) => {
+    signIn: async (req, res) => {
         console.log('UsersController.signIn() called...');
+        const token = signToken(req.user);
+        res.status(200).json({
+            tokenInfo: 'Bearer ' + token
+        });
     },
     // 토큰 인증 확인
-    secret: async (req, res, next) => {
+    secret: async (req, res) => {
         console.log('UsersController.secret() called...');
         res.json({secret: 'resource'});
     }
